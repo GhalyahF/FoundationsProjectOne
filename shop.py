@@ -13,8 +13,7 @@ signature_price = 2.750
 ############################# Start Here! ##############################
 cupcake_shop_name = "Tony's"
 signature_flavors = ["dark chocolate","milk chocolate","explosion", "swirl molten", "chocolate matcha"]
-order_list = []
-
+order_list=[]
 
 def print_menu():
     """
@@ -51,11 +50,10 @@ def is_valid_order(order):
     """
     Check if an order exists in the shop.
     """
-    for order in order_list:
-        if order in menu or order in signature_flavors or order in original_flavors:
-            return True
-        else:
-            return False 
+    if order in menu or order in signature_flavors or order in original_flavors:
+        return True
+    else:
+        return False 
 
 
 def get_order():
@@ -64,20 +62,23 @@ def get_order():
     """
     print()
     print("Hello, welcome to Tony's!")
-    order_list = []
     order= input("Enter items from the menu with the exact spelling. Write 'Exit' when done.\n")
     while order.lower() != "exit":
         if is_valid_order(order) == True:
-            return order_list.append(order)
-        order= input("What else would you like?")
+            order_list.append(order)
+            order= input("What else would you like?")
+    if  order.lower() == "exit":
+        print_order(order_list)
+        return
     else:
-        return order_list
+         order= input("Sorry, this item is not on the menu. What would you like?")
+   
 
 def accept_credit_card(total):
     """
     Return whether an order is eligible for credit card payment.
     """
-    #minimum 5 kd
+    #minimum 2.5 kd
     if total >= 2.5:
         return("Your order is eligible for for credit card payment.")
     else:
@@ -90,7 +91,7 @@ def get_total_price(order_list):
     """
     total = 0
     for order in order_list:
-        if order in menu and is_valid_order == True:
+        if order in menu:
             total+= menu[order]
         if order in original_flavors:
             total += original_price
@@ -104,12 +105,13 @@ def print_order(order_list):
     Print the order of the customer.
     """
     print()
-    print("Your order is:") 
-       for order in order_list:
+    print("Your order is:")
+    # your code goes heret
+    
+    for order in order_list:
         print("- %s" % order)
     total = get_total_price(order_list)
     print("total: %s" % (str(total)))
     print(accept_credit_card(total))
     print("Thank you for shopping with us!")
     print(cupcake_shop_name)
-    # your code goes heret
