@@ -55,7 +55,6 @@ def is_valid_order(order):
     else:
         return False 
 
-
 def get_order():
     """
     Repeatedly ask customer for order until they end their order by typing "Exit".
@@ -67,12 +66,9 @@ def get_order():
         if is_valid_order(order) == True:
             order_list.append(order)
             order= input("What else would you like?")
-    if  order.lower() == "exit":
-        print_order(order_list)
-        return
-    else:
-         order= input("Sorry, this item is not on the menu. What would you like?")
-   
+        else:
+            order= input("Sorry, this item is not on the menu. What would you like?")
+    print_order(order_list)
 
 def accept_credit_card(total):
     """
